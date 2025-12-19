@@ -1,0 +1,123 @@
+.about-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+    align-items: center;
+    position: relative;
+    padding: 2rem 0;
+}
+
+/* --- Image Styling --- */
+.about-image {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.image-frame {
+    position: relative;
+    padding: 5px;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(100, 255, 218, 0.2);
+    z-index: 2;
+    transition: transform 0.3s ease;
+}
+
+.image-frame:hover {
+    transform: translateY(-5px);
+}
+
+.about-image img {
+    width: 100%;
+    max-width: 380px;
+    height: auto;
+    border-radius: 8px; /* Slightly tighter radius */
+    display: block;
+    background: var(--bg-card); /* Fallback */
+    filter: grayscale(20%) contrast(1.1); /* Professional grading */
+    transition: all 0.3s ease;
+}
+
+.about-image img:hover {
+    filter: grayscale(0%) contrast(1);
+}
+
+/* Back Glow */
+.glow-accent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    background: var(--secondary);
+    opacity: 0.2;
+    filter: blur(60px);
+    z-index: 1;
+}
+
+/* --- Text Styling --- */
+#about-text {
+    position: relative;
+    z-index: 5;
+}
+
+#about-text p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    border-left: 2px solid var(--primary-dim);
+    padding-left: 1rem;
+}
+
+.highlight {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* --- Badges --- */
+.about-badges {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.about-badges span {
+    background: rgba(100, 255, 218, 0.05); /* Very subtle tint */
+    border: 1px solid var(--primary-dim);
+    color: var(--primary);
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    font-family: var(--font-code);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    cursor: none;
+}
+
+.about-badges span:hover {
+    background: var(--primary-dim);
+    box-shadow: 0 0 10px var(--primary-dim);
+    color: var(--bg-dark); /* Contrast text on hover */
+    font-weight: 600;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .about-wrapper {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: left;
+    }
+    
+    .about-image img {
+        max-width: 300px;
+    }
+
+    .about-badges {
+        justify-content: flex-start;
+    }
+}

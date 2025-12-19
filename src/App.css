@@ -1,0 +1,148 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@500;700;800&family=Fira+Code:wght@400;600&display=swap");
+
+:root {
+  /* --- Pro Coder / Deep Space Palette --- */
+  --bg-dark: #050b14;
+  --bg-card: #0f1623;
+  --bg-card-hover: #16243a;
+
+  --primary: #64ffda; /* Neon Cyan */
+  --primary-dim: #64ffda40;
+  --secondary: #bd34fe; /* Electric Purple */
+  --secondary-dim: #bd34fe40;
+
+  --text-main: #ccd6f6;
+  --text-muted: #8892b0;
+  --text-highlight: #ffffff;
+
+  --accent-blue: #0a66c2; /* LinkedIn Blue-ish */
+  --accent-pink: #d63384;
+  --accent-yellow: #ffc107;
+
+  --nav-gloss: rgba(10, 25, 47, 0.85);
+
+  --font-heading: "Poppins", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-code: "Fira Code", monospace;
+
+  --transition-fast: 0.2s ease;
+  --transition-smooth: 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+/* --- Global Reset & Base --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  cursor: none; /* Custom cursor everywhere */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  font-size: 16px;
+  overflow-x: hidden;
+}
+
+/* --- Typography --- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  color: var(--text-highlight);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+h2.section-title {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+h2.section-title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: var(--primary);
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
+  box-shadow: 0 0 10px var(--primary);
+}
+
+p {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary);
+  transition: var(--transition-fast);
+  cursor: none;
+}
+
+a:hover {
+  text-shadow: 0 0 8px var(--primary-dim);
+}
+
+ul {
+  list-style: none;
+}
+
+/* --- Buttons & Utilities --- */
+.btn-primary {
+  display: inline-block;
+  padding: 0.8rem 1.8rem;
+  font-family: var(--font-code);
+  font-size: 0.95rem;
+  color: var(--primary);
+  background: transparent;
+  border: 1px solid var(--primary);
+  border-radius: 4px;
+  transition: var(--transition-smooth);
+}
+
+.btn-primary:hover {
+  background: var(--primary-dim);
+  box-shadow: 0 0 15px var(--primary-dim);
+  transform: translateY(-2px);
+}
+
+/* --- Glassmorphism Card Utility --- */
+.glass-card {
+  background: rgba(22, 36, 58, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  transition: var(--transition-smooth);
+}
+
+.glass-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(100, 255, 218, 0.15);
+}
+
+/* --- Layout Wrappers --- */
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
