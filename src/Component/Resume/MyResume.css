@@ -2,96 +2,126 @@
     padding: 0 1rem 5rem;
     display: flex;
     justify-content: center;
+    perspective: 1000px; /* For 3D tilt if we added JS, but adds depth */
 }
 
-.resume-card {
-    background: var(--bg-card);
+.resume-container {
     width: 100%;
-    max-width: 900px; /* Wider for professional resume look */
-    border-radius: 12px;
-    padding: 3rem;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 10px 40px -15px rgba(2, 12, 27, 0.5);
+    max-width: 900px;
+    text-align: center;
 }
 
-.resume-content {
+/* --- Holographic Card --- */
+.holographic-card {
+    position: relative;
+    background: rgba(10, 15, 30, 0.7);
+    border-radius: 20px;
+    padding: 4rem 2rem;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(0, 242, 96, 0.05); /* Subtle green glow base */
+    transition: all 0.5s ease;
+}
+
+.holographic-card:hover {
+    box-shadow: 0 0 60px rgba(0, 242, 96, 0.15), 0 0 20px rgba(213, 51, 105, 0.1);
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Animated Background Gradient */
+.holo-bg {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+        from 0deg, 
+        transparent 0deg, 
+        rgba(0, 242, 96, 0.1) 60deg, 
+        transparent 120deg,
+        rgba(213, 51, 105, 0.1) 240deg,
+        transparent 360deg
+    );
+    animation: rotate-holo 10s linear infinite;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+@keyframes rotate-holo {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.holo-content {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    align-items: center;
+    gap: 2rem;
 }
 
-.resume-section-block h3 {
-    font-size: 1.5rem;
+.holo-title {
+    font-size: 2.5rem;
     color: var(--text-highlight);
-    margin-bottom: 1.5rem;
-    border-bottom: 2px solid var(--primary-dim);
-    padding-bottom: 0.5rem;
-    display: inline-block;
-}
-
-.resume-item {
-    margin-bottom: 1.5rem;
-    padding-left: 1rem;
-    border-left: 2px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
-}
-
-.resume-item:hover {
-    border-left-color: var(--primary);
-}
-
-.resume-item h4 {
-    color: var(--text-highlight);
-    font-size: 1.1rem;
-    margin-bottom: 0.3rem;
-}
-
-.company {
-    color: var(--primary);
-    font-family: var(--font-code);
-    font-size: 0.9rem;
-    margin-bottom: 0.8rem;
-}
-
-.resume-item ul {
-    list-style: none;
-    padding-left: 0;
-}
-
-.resume-item li {
-    position: relative;
-    padding-left: 1.2rem;
     margin-bottom: 0.5rem;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.holo-text {
+    font-size: 1.1rem;
     color: var(--text-muted);
+    max-width: 500px;
+    line-height: 1.6;
 }
 
-.resume-item li::before {
-    content: "▹";
-    position: absolute;
-    left: 0;
-    color: var(--primary);
+.holo-actions {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-/* Certifications list */
-.cert-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
+/* --- Buttons --- */
+.btn-holo {
+    background: linear-gradient(135deg, var(--primary), #0575e6);
+    color: #000;
+    padding: 1rem 3rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    transition: 0.3s;
+    box-shadow: 0 0 20px rgba(0, 242, 96, 0.4);
 }
 
-.cert-list li {
-    background: rgba(255, 255, 255, 0.03);
-    padding: 1rem;
-    border-radius: 4px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+.btn-holo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 40px rgba(0, 242, 96, 0.7);
+    color: #000;
 }
 
-.cert-list li:hover {
-    border-color: var(--primary-dim);
+.btn-holo-outline {
+    background: transparent;
+    color: var(--text-highlight);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: 0.3s;
 }
 
-@media (max-width: 768px) {
-    .resume-card {
-        padding: 1.5rem;
-    }
+.btn-holo-outline:hover {
+    border-color: var(--secondary);
+    color: var(--secondary);
+    box-shadow: 0 0 20px rgba(213, 51, 105, 0.3);
 }

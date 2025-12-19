@@ -4,15 +4,13 @@ import {
   FaUser,
   FaCode,
   FaProjectDiagram,
-  FaImages,
   FaFileAlt,
   FaEnvelope,
-  FaBars,
   FaGithub,
   FaLinkedin,
-  FaTelegramPlane,
 } from "react-icons/fa";
 import { IoMail } from "react-icons/io5";
+import LogoFull from "../../assets/images/logo/logo-full3.webp";
 
 function MyNavbar() {
   const [activeSection, setActiveSection] = useState("about");
@@ -29,14 +27,16 @@ function MyNavbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
+      setScrolled(window.scrollY > 20);
 
       const sections = document.querySelectorAll("main section");
       let current = "";
 
       sections.forEach((section) => {
         const sectionTop = section.offsetTop - 120;
-        if (window.scrollY >= sectionTop) current = section.getAttribute("id");
+        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + section.offsetHeight) {
+           current = section.getAttribute("id");
+        }
       });
 
       setActiveSection(current);
@@ -81,20 +81,31 @@ function MyNavbar() {
     <>
       {/* Desktop Navigation */}
       <nav className={`my-nav desktop-nav ${scrolled ? "scrolled" : ""}`}>
-        {sections.map(({ id, icon }) => (
-          <button
-            key={id}
-            className={`nav-link ${activeSection === id ? "active" : ""}`}
-            onClick={() => scrollToSection(id)}
-          >
-            <span className="icon">{icon}</span>
-            {id.charAt(0).toUpperCase() + id.slice(1)}
-          </button>
-        ))}
+        <div className="nav-container">
+          <div className="nav-logo-wrapper" onClick={() => window.scrollTo(0,0)}>
+            <img src={LogoFull} alt="Ahmed Ghallab" className="nav-logo" />
+          </div>
+
+          <div className="nav-links">
+            {sections.map(({ id, icon }) => (
+              <button
+                key={id}
+                className={`nav-link ${activeSection === id ? "active" : ""}`}
+                onClick={() => scrollToSection(id)}
+              >
+                <span className="icon">{icon}</span>
+                {id.charAt(0).toUpperCase() + id.slice(1)}
+              </button>
+            ))}
+          </div>
+        </div>
       </nav>
 
       {/* Mobile Navigation */}
       <nav className={`my-nav mobile-nav ${scrolled ? "scrolled" : ""}`}>
+        <div className="nav-logo-wrapper-mobile">
+           <img src={LogoFull} alt="Ahmed Ghallab" className="nav-logo-mobile" />
+        </div>
         <button
           className="hamburger-btn"
           onClick={() => setShowOffcanvas(true)}

@@ -1,53 +1,29 @@
 import React, { useState } from "react";
 import "./ContactForm.css";
-import { FaGithub, FaLinkedin, FaTelegramPlane } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { IoMail } from "react-icons/io5";
 
 function ContactForm() {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
-    phone: "+971 ",
-    message: "",
+    phone: "",
+    message: ""
   });
 
-  const [errors, setErrors] = useState({});
-  const [toast, setToast] = useState("");
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const phoneRegex = /^\+?[0-9\s-]{10,}$/;
-
-  const validate = (name, value) => {
-    let msg = "";
-    if (name === "email" && !emailRegex.test(value)) msg = "Invalid email";
-    if (name === "phone" && !phoneRegex.test(value))
-      msg = "Invalid phone number";
-    setErrors((prev) => ({ ...prev, [name]: msg }));
-  };
-
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-    validate(name, value);
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
-    if (Object.values(errors).some((err) => err !== "")) return;
-
-    const mailto = `mailto:eng.ahmedghallab@gmail.com?subject=Contact from ${
-      formData.fullName
-    }&body=${encodeURIComponent(
-      `Name: ${formData.fullName}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nMessage: ${formData.message}`
-    )}`;
-
-    window.location.href = mailto;
-
-    setToast("Message prepared in mail app ✅");
-    setTimeout(() => setToast(""), 3000);
+    const subject = `Portfolio Contact from ${formData.fullName}`;
+    const body = `Name: ${formData.fullName}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nMessage: ${formData.message}`;
+    
+    // Open default mail client
+    window.location.href = `mailto:eng.ahmedghallab@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
-  // Social links data
   const socialLinks = [
     {
       icon: <FaGithub />,
@@ -69,9 +45,12 @@ function ContactForm() {
   return (
     <section id="contact">
       <div className="contact-wrapper">
-        {toast && <div className="toast">{toast}</div>}
         <h2 className="form-title">Get In Touch</h2>
-        <form className="contact-form" onSubmit={handleSubmit}>
+        <p className="contact-desc">
+          I'm currently looking for new opportunities. My inbox is always open!
+        </p>
+        
+        <form className="contact-form" onSubmit={handleFormSubmit}>
           <div className="form-group">
             <label>Full Name</label>
             <input
@@ -94,20 +73,17 @@ function ContactForm() {
               onChange={handleChange}
               required
             />
-            {errors.email && <small className="error">{errors.email}</small>}
           </div>
 
           <div className="form-group">
-            <label>Phone</label>
+            <label>Phone (Optional)</label>
             <input
               type="tel"
               name="phone"
               placeholder="+971 50 000 0000"
               value={formData.phone}
               onChange={handleChange}
-              required
             />
-            {errors.phone && <small className="error">{errors.phone}</small>}
           </div>
 
           <div className="form-group">
@@ -123,7 +99,7 @@ function ContactForm() {
           </div>
 
           <button type="submit" className="submit-btn">
-            Send
+            Send Message
           </button>
         </form>
 

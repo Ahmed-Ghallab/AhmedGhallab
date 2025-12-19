@@ -1,52 +1,49 @@
 import "../../Component/Header/MyHeader.css";
 import Container from "react-bootstrap/esm/Container";
 import { useEffect, useState } from "react";
-import LogoFull from "../../assets/images/logo/logo-full3.webp";
-
-// Icons
-import HtmlIcon from "../../assets/images/Illustrations/left/html-file-type.svg";
-import CssIcon from "../../assets/images/Illustrations/left/css-svg.svg";
-import JsIcon from "../../assets/images/Illustrations/left/js-square.svg";
-import ReactIcon from "../../assets/images/Illustrations/left/react-svg.svg";
-import BootstrapIcon from "../../assets/images/Illustrations/left/bootstrap-fill.svg";
-import ResponsiveIcon from "../../assets/images/Illustrations/left/responsive.svg";
-import GithubIcon from "../../assets/images/Illustrations/left/github.svg";
+import FloatingIcons from "./FloatingIcons";
 
 function MyHeader() {
   const [text, setText] = useState("");
-  const fullText = "Front-End Developer";
-  const [index, setIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [loopNum, setLoopNum] = useState(0);
+  const [typingSpeed, setTypingSpeed] = useState(150);
+
+  const toRotate = [ "Front-End Developer", "React Specialist", "UI/UX Enhancer" ];
 
   useEffect(() => {
-    if (index < fullText.length) {
-      setTimeout(() => {
-        setText(text + fullText[index]);
-        setIndex(index + 1);
-      }, 100);
-    }
-  }, [index]);
+    const handleType = () => {
+      const i = loopNum % toRotate.length;
+      const fullText = toRotate[i];
+
+      setText(isDeleting 
+        ? fullText.substring(0, text.length - 1) 
+        : fullText.substring(0, text.length + 1)
+      );
+
+      // Typing Speed Logic
+      setTypingSpeed(isDeleting ? 50 : 150);
+
+      if (!isDeleting && text === fullText) {
+        // Finished typing, wait before deleting
+        setTimeout(() => setIsDeleting(true), 2000);
+      } else if (isDeleting && text === "") {
+        // Finished deleting, move to next
+        setIsDeleting(false);
+        setLoopNum(loopNum + 1);
+      }
+    };
+
+    const timer = setTimeout(handleType, typingSpeed);
+    return () => clearTimeout(timer);
+  }, [text, isDeleting, loopNum, typingSpeed]);
 
   return (
-    <header className="hero-section">
-      {/* Abstract Background Elements */}
+    <header className="hero-section" id="home">
+      <FloatingIcons />
       <div className="hero-bg-overlay"></div>
       
-      {/* Floating Tech Stack Icons */}
-      <div className="floating-icons">
-        <img src={HtmlIcon} alt="HTML" className="icon i-html" />
-        <img src={CssIcon} alt="CSS" className="icon i-css" />
-        <img src={JsIcon} alt="JS" className="icon i-js" />
-        <img src={ReactIcon} alt="React" className="icon i-react" />
-        <img src={BootstrapIcon} alt="Bootstrap" className="icon i-boot" />
-        <img src={GithubIcon} alt="Github" className="icon i-git" />
-      </div>
-
       <Container className="hero-content">
-        <div className="hero-logo-wrapper">
-             {/* Optional: Use the logo if desired, or just text. Keeping logo for brand. */}
-             <img src={LogoFull} alt="Ahmed Ghallab" className="hero-logo" />
-        </div>
-        
         <p className="hero-greeting">Hi, my name is</p>
         <h1 className="hero-name">Ahmed Ghallab.</h1>
         <h2 className="hero-role">

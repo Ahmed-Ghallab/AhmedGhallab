@@ -5,59 +5,51 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 1rem;
+    padding: 100px 1rem 0; /* Added top padding for fixed navbar */
     overflow: hidden;
-    background: radial-gradient(circle at 15% 50%, rgba(100, 255, 218, 0.08), transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(189, 52, 254, 0.08), transparent 25%);
+    /* Background handled by global + FloatingIcons */
 }
 
+/* Overlay for readability */
 .hero-bg-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-    background-size: 50px 50px;
-    z-index: 0;
+    background: radial-gradient(circle at center, transparent 0%, var(--bg-dark) 90%);
+    z-index: 1;
     pointer-events: none;
-    mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
 }
 
 .hero-content {
     position: relative;
     z-index: 10;
-    max-width: 900px;
-    text-align: left; /* Default left align for "pro" look */
+    max-width: 1000px;
+    text-align: center; /* Centered for maximum impact */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* --- Typography & Elements --- */
-.hero-logo-wrapper {
-    margin-bottom: 2rem;
-}
-
-.hero-logo {
-    width: 60px;
-    height: auto;
-    filter: drop-shadow(0 0 10px rgba(100, 255, 218, 0.3));
-}
-
 .hero-greeting {
     font-family: var(--font-code);
     color: var(--primary);
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-    letter-spacing: 1px;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+    animation: fadeInDown 0.8s ease-out;
 }
 
 .hero-name {
-    font-size: clamp(3rem, 8vw, 5rem);
-    font-weight: 800;
+    font-size: clamp(3.5rem, 9vw, 6rem);
+    font-weight: 900;
     color: var(--text-highlight);
     line-height: 1.1;
-    margin-bottom: 0.5rem;
-    letter-spacing: -1px;
+    margin-bottom: 1rem;
+    letter-spacing: -2px;
+    animation: fadeInUp 0.8s ease-out 0.2s backwards;
 }
 
 .hero-role {
@@ -65,7 +57,8 @@
     color: var(--text-muted);
     font-weight: 700;
     margin-bottom: 2rem;
-    line-height: 1.1;
+    line-height: 1.2;
+    animation: fadeInUp 0.8s ease-out 0.4s backwards;
 }
 
 .highlight-text {
@@ -73,23 +66,30 @@
 }
 
 .hero-desc {
-    max-width: 540px;
-    font-size: 1.1rem;
+    max-width: 600px;
+    font-size: 1.25rem;
     color: var(--text-muted);
     line-height: 1.8;
-    margin-bottom: 3rem;
+    margin-bottom: 3.5rem;
+    animation: fadeInUp 0.8s ease-out 0.6s backwards;
 }
 
 .code-font {
     font-family: var(--font-code);
-    color: var(--primary);
+    color: var(--secondary);
     font-weight: 600;
+    background: linear-gradient(120deg, var(--secondary), var(--accent-purple));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-/* --- Cursor Blink Animation --- */
+/* --- Typewriter Cursor --- */
 .cursor-blink {
-    color: var(--primary);
+    color: var(--secondary);
     animation: blink 1s step-end infinite;
+    font-weight: 300;
+    margin-left: 5px;
 }
 
 @keyframes blink {
@@ -97,55 +97,22 @@
     50% { opacity: 0; }
 }
 
-/* --- CTA Button Customization --- */
-.hero-cta {
-    padding: 1rem 2.5rem;
-    font-size: 1rem;
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- Floating Icons --- */
-.floating-icons {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.icon {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    opacity: 0.15;
-    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
-    animation: float 6s ease-in-out infinite;
-}
-
-/* Position scattered icons */
-.i-html { top: 15%; left: 10%; animation-delay: 0s; }
-.i-css { top: 60%; left: 5%; width: 45px; animation-delay: 1s; }
-.i-js { top: 20%; right: 15%; width: 60px; animation-delay: 2s; }
-.i-react { bottom: 15%; right: 10%; width: 70px; animation-delay: 1.5s; opacity: 0.2; }
-.i-boot { bottom: 20%; left: 20%; width: 40px; animation-delay: 3s; }
-.i-git { top: 10%; right: 40%; width: 35px; animation-delay: 0.5s; }
-
-@keyframes float {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
-    100% { transform: translateY(0); }
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* --- Mobile Queries --- */
 @media (max-width: 768px) {
     .hero-section {
-        align-items: center;
-        text-align: left; /* Keep left align usually looks better */
-        padding-top: 4rem; /* Spacing for nav */
+        padding-top: 6rem;
     }
-    
-    .hero-logo {
-        width: 50px;
+    .hero-name {
+        margin-bottom: 0.5rem;
     }
 }

@@ -1,30 +1,32 @@
 .my-footer {
-    padding: 2rem 1rem;
+    padding: 3rem 1rem;
     text-align: center;
-    background-color: var(--bg-dark);
+    background-color: var(--bg-card); /* Slightly different bg for separation */
     font-family: var(--font-code);
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--text-muted);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
+    position: relative;
+    z-index: 10;
 }
 
 .footer-logo {
-    width: 40px;
+    width: 60px; /* Bigger */
     height: auto;
-    filter: grayscale(100%);
+    filter: drop-shadow(0 0 10px rgba(0, 242, 96, 0.4));
     transition: 0.3s ease;
-    opacity: 0.5;
+    opacity: 1;
 }
 
 .footer-logo:hover {
-    filter: none;
-    opacity: 1;
-    transform: rotate(360deg);
+    transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(0 0 20px rgba(0, 242, 96, 0.8));
 }
 
 .my-footer span {
     color: var(--primary);
+    font-weight: 700;
 }

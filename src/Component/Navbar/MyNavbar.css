@@ -6,29 +6,63 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding: 1rem 0;
+    padding: 1.5rem 0;
     z-index: 1000;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
     background: transparent;
 }
 
+.nav-container {
+    width: 100%;
+    max-width: 1300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
 .desktop-nav.scrolled {
-    background: var(--nav-gloss);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(3, 7, 18, 0.85); /* Darker, more premium gloss */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     padding: 0.8rem 0;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+.nav-logo-wrapper {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.nav-logo {
+    height: 40px; /* Adjust size as needed */
+    width: auto;
+    filter: drop-shadow(0 0 5px rgba(0, 242, 96, 0.2));
+}
+
+.nav-logo-wrapper:hover {
+    transform: scale(1.05);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0.5rem 1.5rem;
+    border-radius: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(5px);
 }
 
 .nav-link {
     background: none;
     border: none;
     color: var(--text-muted);
-    font-family: var(--font-code);
-    font-size: 0.9rem;
-    margin: 0 1.2rem;
+    font-family: var(--font-body); /* Switch to body font for cleaner look */
+    font-weight: 500;
+    font-size: 0.95rem;
+    margin: 0 1rem;
     padding: 0.5rem 0;
     position: relative;
     display: flex;
@@ -40,7 +74,7 @@
 
 .nav-link .icon {
     font-size: 1.1rem;
-    display: none; /* Hide icon on desktop for cleaner look, or keep if preferred */
+    display: none; /* Keep hidden on desktop for clean aesthetic */
 }
 
 /* Hover & Active States */
@@ -70,9 +104,33 @@
 .mobile-nav {
     display: none;
     position: fixed;
-    top: 1rem;
-    right: 1.5rem;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 1.5rem;
     z-index: 1001;
+    display: flex; /* Override for mobile */
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+.mobile-nav.scrolled {
+    background: rgba(3, 7, 18, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nav-logo-mobile {
+    height: 35px;
+    width: auto;
+}
+
+/* Hiding mobile nav properly on desktop is handled by media query below, 
+   but we need to ensure the .mobile-nav logic works */
+.mobile-nav {
+    display: none; /* Hidden by default */
 }
 
 .hamburger-btn {

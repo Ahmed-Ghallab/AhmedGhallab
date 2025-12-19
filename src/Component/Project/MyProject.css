@@ -11,45 +11,37 @@
 }
 
 /* --- Image Side --- */
+/* --- Image Side --- */
 .project-image-wrapper {
     grid-column: 1 / 8;
     grid-row: 1 / -1;
     position: relative;
-    border-radius: 8px;
-    background-color: var(--primary);
+    border-radius: 12px;
+    background-color: transparent;
     overflow: hidden;
     height: 100%;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    cursor: auto;
+    box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+    transition: transform 0.3s ease;
 }
 
 .project-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    mix-blend-mode: multiply;
-    filter: grayscale(100%) contrast(1) brightness(90%);
-    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    /* Removed blend mode and filter to show original colors clearly */
+    transition: transform 0.5s ease;
 }
 
-.img-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(10, 25, 47, 0.4);
-    transition: all 0.3s ease;
+.project-image-wrapper:hover {
+    transform: translateY(-5px);
 }
 
 .project-image-wrapper:hover .project-img {
-    mix-blend-mode: normal;
-    filter: none;
+    transform: scale(1.03);
 }
 
-.project-image-wrapper:hover .img-overlay {
-    background-color: transparent;
-}
+/* Overlay removed completely */
 
 /* --- Content Side --- */
 .project-content {
@@ -187,4 +179,41 @@
     .project-tech, .project-links {
         justify-content: flex-start;
     }
+}
+
+.project-view-all {
+    margin-top: 2rem;
+    background: transparent;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    padding: 1rem 3rem;
+    font-size: 1.1rem;
+    position: relative;
+    overflow: hidden;
+    transition: 0.4s;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.project-view-all::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--primary);
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.project-view-all:hover {
+    color: var(--bg-dark);
+    box-shadow: 0 0 20px var(--primary-dim);
+}
+
+.project-view-all:hover::before {
+    transform: scaleX(1);
 }

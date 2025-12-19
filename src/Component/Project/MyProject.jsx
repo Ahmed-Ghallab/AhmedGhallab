@@ -79,7 +79,6 @@ function MyProject() {
         <div className="project-card" key={project.id}>
           <div className="project-image-wrapper">
              <img src={project.images[0]?.src} alt={project.name} className="project-img" />
-             <div className="img-overlay"></div>
           </div>
           
           <div className="project-content">
@@ -112,7 +111,7 @@ function MyProject() {
 
       <div style={{ textAlign: "center", marginTop: "2rem" }}>
         <button
-          className="project-buttons buttons"
+          className="btn-primary project-view-all"
           onClick={() =>
             window.open("https://github.com/Ahmed-Ghallab", "_blank")
           }

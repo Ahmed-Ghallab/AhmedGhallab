@@ -1,0 +1,35 @@
+.floating-icons-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.floating-icon {
+  position: absolute;
+  opacity: 0.15;
+  filter: drop-shadow(0 0 5px currentColor);
+  animation: floatPath linear infinite;
+}
+
+@keyframes floatPath {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(20px, -30px) rotate(90deg);
+  }
+  50% {
+    transform: translate(-10px, -60px) rotate(180deg);
+  }
+  75% {
+    transform: translate(-30px, -30px) rotate(270deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(360deg);
+  }
+}
